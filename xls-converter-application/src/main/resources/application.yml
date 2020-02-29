@@ -1,0 +1,7 @@
+springdoc:
+  swagger-ui:
+    path: /api-docs/index.html
+
+# TODO
+#logging:
+#  config: ${logback.configurationFile:classpath:logback.xml}

@@ -1,0 +1,8 @@
+version: '3.6'
+services:
+  xls-converter:
+    build:
+      context: ../../../target/docker/xls-converter/build
+      dockerfile: Dockerfile
+    ports:
+    - 8080:8080
