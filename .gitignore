@@ -1,0 +1,16 @@
+target/
+
+*.log
+*.iml
+*.eml
+*.zip
+
+#Intellij ignores
+/.idea
+*.flattened-pom.xml
+
+#eclipse ignores
+.classpath
+.settings
+.project
+.factorypath
