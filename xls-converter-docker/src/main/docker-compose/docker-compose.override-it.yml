@@ -1,0 +1,6 @@
+version: '3.6'
+services:
+  xls-converter:
+    image: xls-converter:${project_version}
+    ports:
+    - 8080:8080

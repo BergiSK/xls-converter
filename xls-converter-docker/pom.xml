@@ -12,6 +12,10 @@
     <artifactId>xls-converter-docker</artifactId>
     <packaging>pom</packaging>
 
+    <properties>
+        <project_version>${project.version}</project_version>
+    </properties>
+
     <profiles>
         <profile>
             <id>build-and-push-docker-image</id>
@@ -20,6 +24,32 @@
             </activation>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/docker-deps</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>src/main/docker-compose</directory>
+                                            <targetPath>${project.build.directory}/docker-compose</targetPath>
+                                            <includes>
+                                                <include>docker-compose.override-it.yml</include>
+                                            </includes>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
                     <plugin>
                         <groupId>io.fabric8</groupId>
                         <artifactId>docker-maven-plugin</artifactId>

@@ -11,5 +11,95 @@
 
     <artifactId>xls-converter-test-functional</artifactId>
 
+    <properties>
+        <skipITs>false</skipITs>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
+
+        <!-- Test scope dependencies -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.dkanejs.maven.plugins</groupId>
+                <artifactId>docker-compose-maven-plugin</artifactId>
+                <configuration>
+                    <skip>${skipITs}</skip>
+                    <composeFiles>
+                        <composeFile>${project.parent.basedir}/xls-converter-docker/target/docker-compose/docker-compose.override-it.yml</composeFile>
+                    </composeFiles>
+                    <detachedMode>true</detachedMode>
+                    <removeImages>true</removeImages>
+                    <removeVolumes>true</removeVolumes>
+                    <removeImagesType>local</removeImagesType>
+                    <projectName>xls_converter_${git.commit.id.abbrev}_${custom.build.timestamp}</projectName>
+                    <build>true</build>
+                    <!--<envFile>${project.build.directory}/envIT</envFile>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>launch-application-for-verification</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>up</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>shutdown-application-after-verification</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>down</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
