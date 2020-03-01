@@ -40,7 +40,7 @@ public class ConversionController {
             array = @ArraySchema(schema = @Schema(implementation = DeliveryDto.class))
         ))
     @RequestMapping(value = "/deliveries",
-        produces = { "application/json" },
+        produces = { MediaType.APPLICATION_JSON_VALUE },
         consumes = { "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" },
         method = RequestMethod.POST)
     public ResponseEntity<List<DeliveryDto>> getDeliveries(@RequestBody Resource inputResource) {
