@@ -1,6 +1,6 @@
 package com.erste.acme.xlsconverter.core.poi;
 
-import com.erste.acme.xlsconverter.domain.entity.Delivery;
+import com.erste.acme.commons.domain.entity.Delivery;
 import org.apache.poi.ss.usermodel.Row;
 
 public interface RowMapper {

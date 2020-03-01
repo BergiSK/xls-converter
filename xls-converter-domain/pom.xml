@@ -13,6 +13,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.erste.acme</groupId>
+            <artifactId>acme-commons-domain</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.immutables</groupId>
             <artifactId>value</artifactId>
             <scope>provided</scope>

@@ -1,7 +1,7 @@
 package com.erste.acme.xlsconverter.core.poi;
 
-import com.erste.acme.xlsconverter.domain.entity.Delivery;
-import com.erste.acme.xlsconverter.domain.entity.Product;
+import com.erste.acme.commons.domain.entity.Delivery;
+import com.erste.acme.commons.domain.entity.Product;
 import com.erste.acme.xlsconverter.domain.exception.XlsConverterException;
 import java.util.Date;
 import java.util.Optional;
